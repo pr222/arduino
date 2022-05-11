@@ -33,7 +33,7 @@ void displayHumidity() {
   carrier.display.setCursor(20, 70);
   carrier.display.println("Humid: ");
   carrier.display.setTextSize(4);
-    carrier.display.setCursor(30, 120);
+  carrier.display.setCursor(30, 120);
   carrier.display.print(humidity);
   carrier.display.println(" %");
 }
@@ -77,6 +77,8 @@ void loop() {
   Serial.print("Humidity: ");
   Serial.print(humidity);
   Serial.println(" %");
+
+  Serial.println();
 
   handleTouch();
 
