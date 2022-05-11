@@ -6,6 +6,7 @@ MKRIoTCarrier carrier;
 
 float temperature = 0;
 float humidity = 0;
+int temperatureCalibration = 2;
 
 void displayTemperature() {
   // Set colors (comes from the Adafruit-ST7735-Library)
@@ -65,7 +66,7 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   // Update sensor reading values
-  temperature = carrier.Env.readTemperature();
+  temperature = carrier.Env.readTemperature()-temperatureCalibration;
   humidity = carrier.Env.readHumidity();
  
   // Print to serial port
