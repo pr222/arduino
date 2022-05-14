@@ -43,24 +43,22 @@ void handleTouch() {
   carrier.Buttons.update();
 
   // Determine what to display on the carrier's screen
-  if (carrier.Buttons.getTouch(TOUCH0)) {
+  if (carrier.Buttons.onTouchDown(TOUCH0)) {
+    carrier.display.enableDisplay(true);
+    digitalWrite(TFT_BACKLIGHT, HIGH);
     displayTemperature();
-  } else if (carrier.Buttons.getTouch(TOUCH1)) {
+  } else if (carrier.Buttons.onTouchDown(TOUCH1)) {
+    carrier.display.enableDisplay(true);
+    digitalWrite(TFT_BACKLIGHT, HIGH);
     displayHumidity();
-  /*
-   * Turn off screen.
-   */
-  } else if (carrier.Buttons.getTouch(TOUCH4)) {
-    // https://forum.arduino.cc/t/how-to-turn-off-disply-round-oled-display-via-code/851901/7  
-    carrier.display.fillScreen(ST77XX_BLACK);
-    pinMode(TFT_BACKLIGHT, OUTPUT);
+  } else if (carrier.Buttons.onTouchDown(TOUCH4)) {
+    // Turn off display
+    carrier.display.enableDisplay(false);
     digitalWrite(TFT_BACKLIGHT, LOW);
   }
 }
 
 void setup() {
-  // put your setup code here, to run once:
-  
   // Open Serial monitor to wathc details and errors.
   Serial.begin(9600); 
  
@@ -71,8 +69,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
   // Update sensor reading values
   temperature = carrier.Env.readTemperature()-temperatureCalibration;
   humidity = carrier.Env.readHumidity();
