@@ -43,10 +43,18 @@ void handleTouch() {
   carrier.Buttons.update();
 
   // Determine what to display on the carrier's screen
-  if (carrier.Buttons.onTouchDown(TOUCH0)) {
+  if (carrier.Buttons.getTouch(TOUCH0)) {
     displayTemperature();
-  } else if (carrier.Buttons.onTouchDown(TOUCH1)) {
+  } else if (carrier.Buttons.getTouch(TOUCH1)) {
     displayHumidity();
+  /*
+   * Turn off screen.
+   */
+  } else if (carrier.Buttons.getTouch(TOUCH4)) {
+    // https://forum.arduino.cc/t/how-to-turn-off-disply-round-oled-display-via-code/851901/7  
+    carrier.display.fillScreen(ST77XX_BLACK);
+    pinMode(TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(TFT_BACKLIGHT, LOW);
   }
 }
 
