@@ -21,7 +21,7 @@
 	
 #include <Arduino_MKRIoTCarrier.h>
 MKRIoTCarrier carrier;
-// uint32_t myCustomColor = carrier.leds.Color(255,0,0);
+
 void setup() {
   // Initialize serial and wait for port to open:
   Serial.begin(9600);
@@ -51,24 +51,13 @@ void setup() {
   delay(500);
   CARRIER_CASE = false;
   carrier.begin();
-  //Set if it has the Enclosure mounted
-  // CARRIER_CASE = false;
-  //Initialize the IoTSK carrier and output any errors in the serial monitor
-  // carrier.begin();
-  // delay(1500);
-  // carrier.leds.fill(myCustomColor, 0, 5);
-  // carrier.leds.show();
-  // Serial.print("SEUTP: ")
-  // Serial.print(temperature);
-  // Serial.println();
 }
 
 void loop() {
-  // myCustomColor = carrier.leds.Color(0,255,0);
-  // carrier.leds.show();  
   ArduinoCloud.update();
   
   temperature = carrier.Env.readTemperature();
   Serial.print(temperature);
+
   delay(1000);
 }
